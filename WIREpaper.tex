@@ -10,6 +10,7 @@
 \newenvironment{wileykeywords}{\textsf{Keywords:}\hspace{\stretch{1}}}{\hspace{\stretch{1}}\rule{1ex}{1ex}}
 
 \usepackage{amsmath,amssymb,txfonts,bm}
+\usepackage{feynmf}
 \usepackage{graphicx,xstring}% Include figure files
 
 %\usepackage{caption}
@@ -106,7 +107,7 @@ Table of Content Picture
 %INTRODUCTION
 \section{\sffamily \Large INTRODUCTION}
 
-In 1928, P. A. M. Dirac proposed a relativistic formulation for the quantum theory of a spin 1/2 particle (fermion) with rest mass $m$ in external scalar $V(\vec{r},t)$ and vector $\vec{A}(\vec{r},t)$ fields,\cite{Dirac-1928,Dirac-1929,Dirac-1930}
+In 1928, P. A. M. Dirac proposed a relativistic formulation for the quantum theory of a spin 1/2 particle with rest mass $m$ in external scalar $V(\vec{r},t)$ and vector $\vec{A}(\vec{r},t)$ fields,\cite{Dirac-1928,Dirac-1929,Dirac-1930}
 \begin{equation}
    i \hbar \frac{\partial}{\partial t} \Psi (\vec{r},t) = \left\{ c \vec{\alpha} \left(\vec{p} + \frac{e}{c}\vec{A}(\vec{r},t) \right) + \beta mc^2 + V(\vec{r},t) \right\} \Psi (\vec{r},t)
    \label{Dirac1}
@@ -206,9 +207,21 @@ Introducing the linear combinations $\phi_L=\phi_1+\phi_2$ and $\phi_S=\phi_1-\p
    \quad \text{and} \quad -\frac{i\hbar}{c} \frac{\partial}{\partial t}\phi_S + \left(\vec{\sigma}\vec{p}\right) \phi_L = m_ec\phi_S
    \label{DiracEq2}
 \end{equation}   
-leading after minimal substitution to the Dirac equation (\ref{Dirac1}). The Dirac operator is unbound and the spectrum for a negatively charged spin 1/2 particle of mass $m$ (e.g. an electron or a muon) is shown in Figure \ref{spectrum}.
+leading after minimal substitution (\ref{MinCoup}) to the Dirac equation (\ref{Dirac1}). $\phi_L$ and $\phi_S$ are the large and small component respectively, which will be discussed in more detail in section \ref{}. The Dirac operator is unbound and the spectrum for a negatively charged spin 1/2 particle of mass $m$ (e.g. an electron or a muon) is shown in Figure \ref{fig:spec}. For details on the functional analytical properties of the Dirac equation see refs.\cite{Batz-1973,thaller-1992}.
 
-Introduce the spectrum of the Dirac operator 
+\begin{figure*}[htp!]
+\centering
+\includegraphics[height=40mm]{figspec.jpg}\\
+\caption{Schematic spectrum of the Dirac operator for nuclear charges $Z>0, Z=0$ and $Z<0$.}
+\label{fig:spec}
+\end{figure*}
+
+For a free spin 1/2 particle the relativistic energy-momentum reveals an energy spectrum of $E\in\{-\infty,-mc^2\}\cup\{+mc^2,\infty\}$. The correct interpretation of the negative energy continuum $\{-\infty,-mc^2\}$ in the spectrum of the Dirac operator has caused many misconceptions to flourish. An electron in a bound or positive energy continuum state could fall into the negative energy continuum (in principle down to $E\rightarrow -\infty$) releasing a photon (variational collapse). We experienced a similar situation in pre-quantum theory where Bohr had to confine electrons in discrete orbits in order not to fall into the positively charged nucleus. Now, here we can do exactly the same (formally) confining electrons to the bound states above the negative energy continuum. The original interpretation of Dirac that the negative energy continuum is completely filled with energy and thus the Pauli principle prevents electrons from entering such states is only of historical importance.\footnote{To cite J. Schwinger 1973: \it The picture of an infinite sea of negative energy electrons is now best regarded as an historical curiosity, and forgotten. Unfortunately, this episode, and discussions of vacuum fluctuations, seem to have left people with the impression that the vacuum, the physical state of nothingness, is actually the scene of wild activity.} Further, if we use the same philosophy for the Klein-Gordon equation for spin-0 particles (bosons), there is no Pauli principle at work preventing {\it all} bosons to go to $E\rightarrow -\infty$. A correct interpretation of these negative energy states comes from Feynman and Stueckelberg in quantum field theory which is discussed in the QED chapter \ref{QED}. If QED effects are ignored and the Dirac equation is treated ``as it is'', we simply have to make sure that a variational collapse is prevented (see section \ref{ME-Dirac}). Formally this can be done by introducing projection operators $\Lambda_{+}$ to the Hilbert sub-space of the states above the negative energy continuum,
+\begin{equation}
+   D_{+} = \Lambda_{+} D \Lambda_{+}
+   \label{DiracBS}
+\end{equation}
+This will be discussed in more detail in section \ref{ME-Dirac}.
 
 \subsection{\sffamily Solutions for two-particle systems with opposite charge}
 
@@ -227,7 +240,7 @@ Muonium, quarkonium, etc., problem with confinement, MIT bag model
 \subsection{\sffamily The classical Breit interaction}
 Introduce Breit in a classical way
 
-\subsection{\sffamily The multi-electron Dirac equation}
+\subsection{\label{ME-Dirac} \sffamily The multi-electron Dirac equation}
 Multi-electron Dirac equation, variational principle, properties
 
 \subsubsection{\sffamily Treating the multi-electron Dirac equation}
@@ -252,10 +265,22 @@ Mainly Trond's expertise
 Examples compare 4- with 2-component
 
 %QUANTUM ELeCTRODYNAMICS
-\section{\sffamily \Large QUANTUM ELECTRODYNAMICS}
+\section{\label{QED} \sffamily \Large QUANTUM ELECTRODYNAMICS}
 
 \subsection{\sffamily Introduction to Feynman diagrams}
 Feynman rules
+
+
+%\begin{fmffile*}{diagram}
+%\begin{fmfgraph}(40,25)
+%\fmfleft{i1,i2}
+%\fmfright{o1,o2}
+%\fmf{fermion}q{i1,v1,o1}
+%\fmf{fermion}{i2,v2,o2}
+%\fmf{photon}{v1,v2}
+%\end{fmfgraph}
+%\end{fmffile*}
+
 
 \subsection{\sffamily Vacuum polarization and self-energy}
 
