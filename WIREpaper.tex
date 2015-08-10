@@ -10,8 +10,12 @@
 \newenvironment{wileykeywords}{\textsf{Keywords:}\hspace{\stretch{1}}}{\hspace{\stretch{1}}\rule{1ex}{1ex}}
 
 \usepackage{amsmath,amssymb,txfonts,bm}
-\usepackage{feynmf}
+\usepackage{feynmp-auto}
 \usepackage{graphicx,xstring}% Include figure files
+\usepackage{slashed}
+\usepackage{braket}
+\usepackage{mathtools}
+\usepackage{footmisc}
 
 %\usepackage{caption}
 \usepackage{color}% Include colors for document elements
@@ -170,7 +174,7 @@ More on history of Dirac equation and difficulties treating the many electron sy
 
 \subsection{\sffamily Deriving the Dirac Equation}
 
-The Dirac equation can be derived from the time evolution in eq.(\ref{timeevo}) by a) enforcing Lorentz invariance, b) fulfilling the relativistic energy-momentum relation for a freely moving particle of rest mass $m$,\footnote{Direct quantization of the relativistic energy-momentum relation leads to a square-root operator which is not Lorentz invariant.}
+The Dirac equation can be derived from the time evolution in eq.(\ref{timeevo}) by a) enforcing Lorentz invariance, b) fulfilling the relativistic energy-momentum relation for a freely moving particle of rest mass $m$,\footnote{Direct quantization of the relativistic energy-momentum relation leads to a square-root operator which is not Lorentz invariant. However, in its quadratic form it leads to the Klein-Gordon equation for spin 0 particles.}
 \begin{equation}
    E^2 = c^2p^2 + m^2c^4
    \label{RelEnergy}
@@ -207,7 +211,7 @@ Introducing the linear combinations $\phi_L=\phi_1+\phi_2$ and $\phi_S=\phi_1-\p
    \quad \text{and} \quad -\frac{i\hbar}{c} \frac{\partial}{\partial t}\phi_S + \left(\vec{\sigma}\vec{p}\right) \phi_L = m_ec\phi_S
    \label{DiracEq2}
 \end{equation}   
-leading after minimal substitution (\ref{MinCoup}) to the Dirac equation (\ref{Dirac1}). $\phi_L$ and $\phi_S$ are the large and small component respectively, which will be discussed in more detail in section \ref{}. The Dirac operator is unbound and the spectrum for a negatively charged spin 1/2 particle of mass $m$ (e.g. an electron or a muon) is shown in Figure \ref{fig:spec}. For details on the functional analytical properties of the Dirac equation see refs.\cite{Batz-1973,thaller-1992}.
+leading after minimal substitution (\ref{MinCoup}) to the Dirac equation (\ref{Dirac1}). $\phi_L$ and $\phi_S$ are the large and small component respectively, which will be discussed in more detail in section \ref{Hatom}. The Dirac operator is unbound and the spectrum for a negatively charged spin 1/2 particle of mass $m$ (e.g. an electron or a muon) is shown in Figure \ref{fig:spec}. For details on the functional analytical properties of the Dirac equation see refs.\cite{Batz-1973,thaller-1992}.
 
 \begin{figure*}[htp!]
 \centering
@@ -223,9 +227,11 @@ For a free spin 1/2 particle the relativistic energy-momentum reveals an energy 
 \end{equation}
 This will be discussed in more detail in section \ref{ME-Dirac}.
 
+Explain the problem with probability density.
+
 \subsection{\sffamily Solutions for two-particle systems with opposite charge}
 
-\subsubsection{\sffamily The Electron-Nucleus Interaction}
+\subsubsection{\label{Hatom} \sffamily The Electron-Nucleus Interaction}
 The stationary Dirac equation for an electron in an external (classical) Coulomb field is,
 \begin{equation}
    \left\{ c \vec{\alpha} \vec{p} + \beta mc^2 - Zr^{-1} - \left( E + mc^2\right)\right\} \Psi (\vec{r}) = 0
@@ -240,12 +246,12 @@ In the expression (\ref{DiracCoulomb}) we skipped the center of mass separation,
    \label{DiracCoulomb}
 \end{equation}
 
-
+Explain charge conjugation briefly here and positronic states.
 
 Hydrogen atom with hyperfine structure and QED effects
 
 \subsubsection{\sffamily The Coulomb singularity at the origin and finite extension of the nucleus}
-Nuclear charges greater than 137
+Nuclear charges greater than 137 and the Coulomb singularity.
 
 \subsubsection{\sffamily The Electron-Positron Interaction}
 The two-body Dirac equation describing two oppositely charged particles of mass $m_1$ and $m_2$ in a center-of-mass-system interacting via a classical Coulomb interactions is,
@@ -288,19 +294,93 @@ Examples compare 4- with 2-component
 \subsection{\sffamily Introduction to Feynman diagrams}
 Feynman rules
 
-
-%\begin{fmffile*}{diagram}
-%\begin{fmfgraph}(40,25)
-%\fmfleft{i1,i2}
-%\fmfright{o1,o2}
-%\fmf{fermion}q{i1,v1,o1}
-%\fmf{fermion}{i2,v2,o2}
-%\fmf{photon}{v1,v2}
-%\end{fmfgraph}
-%\end{fmffile*}
-
-
 \subsection{\sffamily Vacuum polarization and self-energy}
+
+%FigureFeynman
+\begin{figure}[!ht]
+\centering
+\begin{tabular}{@{\extracolsep{2mm}}lll}
+\\
+\\
+\begin{fmffile}{vacuum_polarisation_1}
+	\fmfframe(0,0)(0,0){
+	\begin{fmfgraph*}(30,25)
+		\fmfstraight
+		\fmfbottom{in,i2,i3}
+		\fmftop{out,o2,o3}
+		\fmfrightn{r}{7}
+		\fmf{dbl_plain}{in,v1}
+		\fmfdot{v1}
+		\fmf{dbl_plain}{v1,out}
+		\fmffreeze
+		\fmf{photon,label=$\alpha$}{v1,w1}
+		\fmfpolyn{empty,smooth=?,tension=1}{w}{14}
+		\fmfdot{w1,w8}
+		\fmf{phantom}{w8,r4}
+		\fmffreeze
+		\fmf{photon,label=$Z\alpha$,label.side=left}{w8,r4}
+		\fmffreeze
+		\fmfiv{decoration.shape=circle,decoration.filled=empty,decoration.size=7}{vloc(__r4)}
+		\fmfiv{decoration.shape=cross,decoration.size=7}{vloc(__r4)}
+	\end{fmfgraph*}
+	}
+\end{fmffile}
+&
+\begin{fmffile}{vacuum_polarisation_3}
+	\fmfframe(0,0)(0,0){
+	\begin{fmfgraph*}(30,25)
+		\fmfstraight
+		\fmfbottom{in,i2,i3}
+		\fmftop{out,o2,o3}
+		\fmfrightn{r}{7}
+		\fmf{dbl_plain}{in,v1}
+		\fmfdot{v1}
+		\fmf{dbl_plain}{v1,out}
+		\fmffreeze
+		\fmf{photon,label=$\alpha$}{v1,w1}
+		\fmfpolyn{empty,smooth=?,tension=1}{w}{14}
+		\fmfdot{w1,w7,w8,w9}
+		\fmf{phantom}{w8,r4}
+		\fmffreeze
+		\fmf{photon}{w7,r3}
+		\fmf{photon}{w8,r4}
+		\fmf{photon,label=$(Z\alpha)^3$,label.side=left}{w9,r5}
+		\fmffreeze
+		\fmfiv{decoration.shape=circle,decoration.filled=empty,decoration.size=7}{vloc(__r3)}
+		\fmfiv{decoration.shape=cross,decoration.size=7}{vloc(__r3)}
+		\fmfiv{decoration.shape=circle,decoration.filled=empty,decoration.size=7}{vloc(__r4)}
+		\fmfiv{decoration.shape=cross,decoration.size=7}{vloc(__r4)}
+		\fmfiv{decoration.shape=circle,decoration.filled=empty,decoration.size=7}{vloc(__r5)}
+		\fmfiv{decoration.shape=cross,decoration.size=7}{vloc(__r5)}
+	\end{fmfgraph*}
+	}
+\end{fmffile}
+&	
+\begin{fmffile}{self_energy_1}
+	\fmfframe(0,0)(0,0){
+	\begin{fmfgraph*}(30,25)
+		\fmfstraight
+		\fmfbottom{i1,i2,in,i4}
+		\fmftop{o1,o2,out,o4}
+		\fmfleft{left}
+		\fmf{dbl_plain,tension=5}{in,v1}
+		\fmf{plain}{v1,v2,v3}
+		\fmf{photon,right,label=$\alpha$}{v1,v3}
+		\fmf{dbl_plain,tension=5}{v3,out}
+		\fmffreeze
+		\fmf{photon,label=$Z\alpha$,tension=0.4}{v2,left}
+		\fmffreeze
+		\fmfiv{decoration.shape=circle,decoration.filled=empty,decoration.size=7}{vloc(__left)}
+		\fmfiv{decoration.shape=cross,decoration.size=7}{vloc(__left)}
+	\end{fmfgraph*}
+	}
+\end{fmffile}
+\end{tabular}
+\vspace{0.5cm}
+\caption{From the left to the right: vacuum polarisation of order $\alpha (Z\alpha)$ (Uehling) and $\alpha (Z\alpha)^3$ (Wichmann-Kroll), and electron self-energy of order $\alpha (Z\alpha)$. Note that according to Furry's theorem diagrams with a loop containing odd number of vertices vanish.\cite{Furry-1937}
+}
+\label{fig:Feynman2}
+\end{figure}
 
 
 \subsection{\sffamily Breit interaction from QED}
